@@ -1,39 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fvieira <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/15 14:55:18 by fvieira           #+#    #+#             */
-/*   Updated: 2022/12/16 14:47:33 by fvieira          ###   ########.fr       */
+/*   Created: 2022/12/16 20:19:03 by fvieira           #+#    #+#             */
+/*   Updated: 2022/12/16 20:19:10 by fvieira          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	main(int argc, char **argv)
+int	checker(int *stack, int len)
 {
-	int	*stack_a;
-	int	*stack_b;
-	int	count;
+	int count;
+	int	count2;
+	int	flag;
 
-	stack_a = malloc((argc - 1) * sizeof(int));
-	if (checker(stack_a, argc - 1) == 1)
-	{
-		free(stack_a);
-		return (0);
-	}
-	stack_b = malloc(1 * sizeof(int));
 	count = 0;
-	while (count < argc - 1)
+	flag = 0;
+	while (count < len)
 	{
-		stack_a[argc - 1 - count] = ft_atoi(argv[count + 1]);
+		count2 = count + 1;
+		while (count2 < len)
+		{
+			if (stack[count] == stack[count2] || stack[count] > INT_MAX
+				|| stack[count] < INT_MIN)
+			{
+				flag = 1;
+				break ;
+			}
+			count2++;
+		}
 		count++;
 	}
-	/*while (count-- > 0)
-		printf(" %d ", stack_a[count]);*/
-	free(stack_b);
-	free(stack_a);
-	return (0);
+	return (flag);
 }

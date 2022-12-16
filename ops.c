@@ -67,7 +67,6 @@ int	*pop(int *stack, int len)
 		stack[count] = stack[count];
 		count++;
 	}
-	//barra zero aqui?
 	free(stack);
 	return (stack);
 }
@@ -78,14 +77,13 @@ int	*push_1_to_2(int *stack_1, int *stack_2, int len1, int len2)
 	int	count;
 
 	count = 0;
-	stack_1_f = malloc(len1 * sizeof(int));
+	stack_1_f = malloc((len1 - 1) * sizeof(int));
 	while (count < len1 - 1)
 	{
 		stack_1_f[count] = stack_1[count];
 		count++;
 	}
 	stack_1_f[count] = stack_2[len2];
-	//barra zero aqui?
 	free(stack_1);
 	return (stack_1_f);
 }

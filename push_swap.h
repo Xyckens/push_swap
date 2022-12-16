@@ -15,4 +15,8 @@
 
 # include "./libft/libft.h"
 # include <stdio.h>
+# include <limits.h>
+
+int	checker(int *stack, int len);
+
 #endif
