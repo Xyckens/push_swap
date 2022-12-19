@@ -6,7 +6,7 @@
 /*   By: fvieira <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 15:32:17 by fvieira           #+#    #+#             */
-/*   Updated: 2022/12/16 14:45:31 by fvieira          ###   ########.fr       */
+/*   Updated: 2022/12/19 18:40:14 by fvieira          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,22 @@ int	*swap(int *stack, int len)
 {
 	int	temp;
 
-	if (len > 1)
+	if (len > 0)
 	{
 		temp = stack[len];
 		stack[len] = stack[len - 1];
 		stack[len] = temp;
 	}
 	return (stack);
+}
+
+int	should_i_rr_or_r(int stack_len, int index)
+{
+	//esta na parte de cima do stack e para ir para o topo devo fazer ra
+	if (index * 2 >= stack_len)
+		return (1);
+	else
+		return (-1);	
 }
 
 int	*rotate(int *stack, int len)
@@ -39,7 +48,7 @@ int	*rotate(int *stack, int len)
 	return (stack);
 }
 
-int	*revrotate(int *stack, int len)
+void	*revrotate(int *stack, int len)
 {
 	int	temp;
 	int	count;
@@ -57,33 +66,33 @@ int	*revrotate(int *stack, int len)
 
 int	*pop(int *stack, int len)
 {
-	int	*stack;
+	int	*stack_f;
 	int	count;
 
 	count = 0;
-	stack = malloc((len - 1) * sizeof(int));
+	stack_f = malloc((len - 1) * sizeof(int));
 	while (count < len - 1)
 	{
-		stack[count] = stack[count];
+		stack_f[count] = stack[count + 1];
 		count++;
 	}
 	free(stack);
-	return (stack);
+	return (stack_f);
 }
 
-int	*push_1_to_2(int *stack_1, int *stack_2, int len1, int len2)
+int	*push_x_to_y(int *stack_x, int *stack_y, int len1, int len2)
 {
-	int	*stack_1_f;
+	int	*stack_y_f;
 	int	count;
 
 	count = 0;
-	stack_1_f = malloc((len1 - 1) * sizeof(int));
-	while (count < len1 - 1)
+	stack_y_f = malloc((len2 + 1) * sizeof(int));
+	while (count < len2)
 	{
-		stack_1_f[count] = stack_1[count];
+		stack_y_f[count + 1] = stack_y[count];
 		count++;
 	}
-	stack_1_f[count] = stack_2[len2];
-	free(stack_1);
-	return (stack_1_f);
+	stack_y_f[0] = stack_x[0];
+	free(stack_y);
+	return (stack_y_f);
 }
