@@ -12,64 +12,49 @@
 
 #include "push_swap.h"
 
-void	two_sort(int *stack)
+void	two_sort(t_stack *stack)
 {
-	if (stack[0] < stack[1])
-	{
-		swap(&stack, 1);
-		ft_printf("sa\n");
-	}
+	if (stack->stack[0] < stack->stack[1])
+		swap(&stack, 'a');
 }
 
-void	three_sort(int *stack)
+void	three_sort(t_stack *s)
 {
-	if (stack[0] > stack[1] && stack[1] < stack[2] && stack[0] < stack[2])
+	if (s->stack[0] > s->stack[1] && s->stack[1] < s->stack[2]
+		&& s->stack[0] < s->stack[2])
+		swap(&s, 'a');
+	else if (s->stack[0] > s->stack[1] && s->stack[1] > s->stack[2]
+		&& s->stack[0] > s->stack[2])
 	{
-		stack = swap(stack, 2);
-		ft_printf("sa\n");
+		swap(&s, 'a');
+		revrotate(&s, 'a');
 	}
-	else if (stack[0] > stack[1] && stack[1] > stack[2] && stack[0] > stack[2])
+	else if (s->stack[0] > s->stack[1] && s->stack[1] < s->stack[2]
+		&& s->stack[0] > s->stack[2])
+		rotate(&stack, 'a');
+	else if (s->stack[0] < s->stack[1] && s->stack[1] > s->stack[2]
+		&& s->stack[0] < s->stack[2])
 	{
-		stack = swap(stack, 2);
-		ft_printf("sa\n");
-		stack = revrotate(stack,2);
-		ft_printf("rra\n");
+		swap(&s, 'a');
+		rotate(&s, 'a');
 	}
-	else if (stack[0] > stack[1] && stack[1] < stack[2] && stack[0] > stack[2])
-	{
-		rotate(stack, 2);
-		ft_printf("ra\n");
-	}
-	else if (stack[0] < stack[1] && stack[1] > stack[2] && stack[0] < stack[2])
-	{
-		stack = swap(stack, 2);
-		ft_printf("sa\n");
-		stack = rotate(stack,2);
-		ft_printf("ra\n");
-	}
-	if (stack[0] < stack[1] && stack[1] > stack[2] && stack[0] > stack[2])
-	{
-		stack = revrotate(stack, 2);
-		ft_printf("rra\n");
-	}
+	if (s->stack[0] < s->stack[1] && s->stack[1] > s->stack[2]
+		&& s->stack[0] > s->stack[2])
+		revrotate(&s, 'a');
 }
-
-void	four_sort(int *stack_a, int *stack_b)
+/*
+void	four_sort(t_stack *stack_a, t_stack *stack_b)
 {
-	stack_b = push_x_to_y(&stack_a, &stack_b, 4, 0);
-	stack_a = pop(stack_a, 4);
-	ft_printf("pb\n");
+	push(&stack_a, &stack_b, 'b');
 	three_sort(&stack_a);
-	stack_a = push_x_to_y(&stack_b, &stack_a, 1, 3);
-	stack_b = pop(stack_a, 1);
-	ft_printf("pa\n");
-	/*if (stack_a[i] > stack_a[i + 1] && i < 4)
+	push(&stack_b, &stack_a, 'a');
+	if (stack_a[i] > stack_a[i + 1] && i < 4)
 	{
 		
-	}*/
+	}
 }
 
 void	five_sort(int *stack_a, int *stack_b)
 {
 	
-}
+}*/

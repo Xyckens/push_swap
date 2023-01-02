@@ -17,6 +17,12 @@
 # include <stdio.h>
 # include <limits.h>
 
+typedef struct s_stack {
+	int	*stack;
+	int	*finalpos;
+	int	len;
+}	t_stack;
+
 int	checker(int *stack, int len);
 
 #endif
