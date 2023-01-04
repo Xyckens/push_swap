@@ -56,21 +56,37 @@ char *bottom_top_heavy(t_stack *stack)
 		return ("bottom_heavy");
 }
 
+void	prepare_stack_b(t_stack *stack_b, int toarrive)
+{
+	if (stack_b->len > 1)
+	{
+		if (toarrive < stack_b->stack[0])
+		{
+			if (stack_b->stack[0] > stack_b->stack[1])
+				do_swap(&stack_b, 'b');
+		}
+	}
+}
 void sort100less(t_stack *stack_a, t_stack *stack_b)
 {
 	int		count;
-	int		count2;
 	int		fixed_half_len;
 	char	*heavy;
 
 	heavy = bottom_top_heavy(&stack_a);
 	count = stack_a->len / 2;
 	fixed_half_len = stack_a->len / 2;
-	while (count-- >= 0)
+	while (count-- > 0)
 	{
 		while (stack_a->finalpos[0] =< fixed_half_len)
 			rot_or_revrot(&stack_a, heavy, 'a');
-		//aqui devia preparar o stackb para receber perto do sitio correto o numero do stacka
+		prepare_stack_b(&stack_b, stack_a->stack[0]);
 		push(&stack_a, &stack_b, 'b');
+	}
+	while (count++ < fixed_half_len)
+	{
+		if (stack_b->stack[0] < stack_a->stack[0])
+			//funcao que tem de fazer rra ou ra ate poder fazer pa para o sitio certo
+		push(&stack_b, &stack_a, 'a');
 	}
 }

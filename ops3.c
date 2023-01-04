@@ -49,5 +49,4 @@ void rot_or_revrot(t_stack *stack, char *heavy, char c)
 		ft_printf("something (didnt) happened");
 		exit(0);
 	}
-
 }
