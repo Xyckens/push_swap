@@ -37,3 +37,17 @@ void	do_bothrevrot(t_stack *stack_x, t_stack *stack_y)
 	revrotate(&stack_y);
 	ft_printf("rrr\n");
 }
+
+void rot_or_revrot(t_stack *stack, char *heavy, char c)
+{
+	if (!ft_strncmp(heavy, "top_heavy", 9))
+		do_rot(&stack, c);
+	else if (!ft_strncmp(heavy, "bottom_heavy", 12))
+		do_revrot(&stack, c);
+	else
+	{
+		ft_printf("something (didnt) happened");
+		exit(0);
+	}
+
+}

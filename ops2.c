@@ -21,37 +21,48 @@ void	swap(t_stack *stack)
 		temp = stack->stack[stack->len];
 		stack->stack[stack->len] = stack->stack[stack->len - 1];
 		stack->stack[stack->len] = temp;
+		temp = stack->finalpos[stack->len];
+		stack->finalpos[stack->len] = stack->finalpos[stack->len - 1];
+		stack->finalpos[stack->len] = temp;
 	}
 }
 
 void	rotate(t_stack *stack)
 {
 	int	temp;
+	int	temp2;
 	int	temp_len;
 
 	temp = stack->stack[stack->len - 1];
-	temp_len = stack_len;
+	temp2 = stack->finalpos[stack->len - 1];
+	temp_len = stack->len;
 	while (temp_len > 1)
 	{
 		stack->stack[temp_len - 1] = stack->stack[temp_len - 2];
+		stack->finalpos[temp_len - 1] = stack->finalpos[temp_len - 2];
 		temp_len--;
 	}
 	stack->stack[0] = temp;
+	stack->finalpos[0] = temp2;
 }
 
 void	revrotate(t_stack *stack)
 {
 	int	temp;
+	int	temp2;
 	int	count;
 
 	count = 0;
 	temp = stack->stack[0];
+	temp2 = stack->finalpos[0];
 	while (count < stack->len)
 	{
 		stack->stack[count - 1] = stack->stack[count - 2];
+		stack->finalpos[count - 1] = stack->finalpos[count - 2];
 		count++;
 	}
 	stack->stack[stack->len] = temp;
+	stack->finalpos[stack->len] = temp;
 }
 
 void	do_swap(t_stack *stack, char c)

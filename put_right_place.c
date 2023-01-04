@@ -36,14 +36,41 @@
 	push_x_to_y(&stack_b, &stack_a, 'a');
 }*/
 
+char *bottom_top_heavy(t_stack *stack)
+{
+	int	count2;
+	int	max;
+
+	max = stack_a->len;
+	count2 = 0;
+	while(max--)
+	{
+		if (stack_a->finalpos[max] =< stack_a->len / 2)
+			count2++;
+		else if (stack_a->finalpos[max] > stack_a->len / 2)
+			count2--;
+	}
+	if (count2 >= 0)
+		return ("top_heavy");
+	else
+		return ("bottom_heavy");
+}
+
 void sort100less(t_stack *stack_a, t_stack *stack_b)
 {
-	int	nbr2send;
-	int	count;
+	int		count;
+	int		count2;
+	int		fixed_half_len;
+	char	*heavy;
 
+	heavy = bottom_top_heavy(&stack_a);
 	count = stack_a->len / 2;
-	while (count >= 0)
+	fixed_half_len = stack_a->len / 2;
+	while (count-- >= 0)
 	{
+		while (stack_a->finalpos[0] =< fixed_half_len)
+			rot_or_revrot(&stack_a, heavy, 'a');
+		//aqui devia preparar o stackb para receber perto do sitio correto o numero do stacka
 		push(&stack_a, &stack_b, 'b');
 	}
 }

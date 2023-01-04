@@ -42,14 +42,18 @@ void	push_x_to_y(t_stack *stack_x, t_stack *stack_y)
 	while (count < stack_y->len)
 	{
 		stack_y->stack[count + 1] = stack_y->stack[count];
+		stack_y->finalpos[count + 1] = stack_y->finalpos[count];
 		count++;
 	}
 	stack_y->stack[0] = stack_x->stack[0];
+	stack_y->finalpos[0] = stack_x->finalpos[0];
 	pop(&stack_x);
 }
 
 void	push(t_stack *stack_x, t_stack *stack_y, char c)
 {
 	push_x_to_y(&stack_x, &stack_y);
+	stack_x->len--;
+	stack_y->len++;
 	ft_printf("p%c\n", c);
 }
