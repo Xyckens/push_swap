@@ -12,15 +12,6 @@
 
 #include "push_swap.h"
 
-int	should_i_rr_or_r(int stack_len, int index)
-{
-	//esta na parte de cima do stack e para ir para o topo devo fazer ra
-	if (index * 2 >= stack_len)
-		return (1);
-	else
-		return (-1);
-}
-
 void	pop(t_stack *stack)
 {
 	int	count;

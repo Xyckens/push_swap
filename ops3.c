@@ -40,9 +40,9 @@ void	do_bothrevrot(t_stack *stack_x, t_stack *stack_y)
 
 void rot_or_revrot(t_stack *stack, char *heavy, char c)
 {
-	if (!ft_strncmp(heavy, "top_heavy", 9))
+	if (!ft_strncmp(heavy, "rot", 3))
 		do_rot(&stack, c);
-	else if (!ft_strncmp(heavy, "bottom_heavy", 12))
+	else if (!ft_strncmp(heavy, "revrot", 6))
 		do_revrot(&stack, c);
 	else
 	{
