@@ -12,21 +12,29 @@
 
 #include "push_swap.h"
 
-int	checker(t_stack **stack)
+int	checker(t_stack *stack)
 {
 	int	i;
 	int	j;
 	int	flag;
+	int count;
 
 	i = 0;
 	flag = 0;
-	while (i < (*stack)->len)
+	count = 0;
+	while (count < 5)
+	{
+		ft_printf("[%d]\n", stack->stack[count]);
+		count++;
+	}
+	while (i < stack->len && flag == 0)
 	{
 		j = i + 1;
-		while (j < (*stack)->len)
+		while (j < stack->len)
 		{
-			if ((*stack)->stack[i] == (*stack)->stack[j]
-				|| (*stack)->stack[i] > INT_MAX || (*stack)->stack[i] < INT_MIN)
+			ft_printf("%d %d \n", stack->stack[i], stack->stack[j]);
+			if (stack->stack[i] == stack->stack[j]
+				|| stack->stack[j] > INT_MAX || stack->stack[j] < INT_MIN)
 			{
 				flag = 1;
 				ft_printf("Error\n");

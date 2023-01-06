@@ -25,24 +25,33 @@ void freeall(t_stack **stack_a, t_stack **stack_b)
 
 int	main(int argc, char **argv)
 {
-	t_stack	*stack_a;
-	t_stack	*stack_b;
+	t_stack	stack_a;
+	t_stack	stack_b;
 	int		count;
 
-	stack_a->stack = malloc((argc - 1) * sizeof(int));
+	stack_a.stack = malloc((argc - 1) * sizeof(int));
+	stack_a.len = argc - 1;
+	count = 0;
+	while (count < argc - 1)
+	{
+		stack_a.stack[count] = ft_atoi(argv[count + 1]);
+		count++;
+	}
 	if (checker(&stack_a) != 1)
 	{
-		stack_a->finalpos = malloc((argc - 1) * sizeof(int));
-		stack_b->stack = malloc((argc - 1) * sizeof(int));
-		stack_b->finalpos = malloc((argc - 1) * sizeof(int));
-		count = 0;
-		while (count < argc - 1)
-		{
-			stack_a->stack[argc - 1 - count] = ft_atoi(argv[count + 1]);
-			count++;
-		}
-		finalpos(&stack_a);
+		stack_a.finalpos = malloc((argc - 1) * sizeof(int));
+		stack_b.stack = malloc((argc - 1) * sizeof(int));
+		stack_b.finalpos = malloc((argc - 1) * sizeof(int));
+		
+		//finalpos(&stack_a);
 	}
-	freeall(&stack_a, &stack_b);
+	//test
+	/*count = 0;
+	while (count < argc - 1)
+	{
+		ft_printf("[%d]\n", stack_a->stack[count]);
+		count++;
+	}*/
+	//freeall(stack_a, stack_b);
 	return (0);
 }

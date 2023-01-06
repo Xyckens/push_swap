@@ -23,7 +23,7 @@ typedef struct s_stack {
 	int	len;
 }	t_stack;
 
-int		checker(t_stack **stack);
+int		checker(t_stack *stack);
 void	finalpos(t_stack **stack);
 void	push(t_stack **stack_x, t_stack **stack_y, char c);
 void	rotate(t_stack **stack);
