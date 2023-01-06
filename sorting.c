@@ -12,35 +12,35 @@
 
 #include "push_swap.h"
 
-void	two_sort(t_stack *stack)
+void	two_sort(t_stack **stack)
 {
-	if (stack->stack[0] < stack->stack[1])
-		swap(&stack, 'a');
+	if ((*stack)->stack[0] < (*stack)->stack[1])
+		do_swap(stack, 'a');
 }
 
-void	three_sort(t_stack *s)
+void	three_sort(t_stack **s)
 {
-	if (s->stack[0] > s->stack[1] && s->stack[1] < s->stack[2]
-		&& s->stack[0] < s->stack[2])
-		swap(&s, 'a');
-	else if (s->stack[0] > s->stack[1] && s->stack[1] > s->stack[2]
-		&& s->stack[0] > s->stack[2])
+	if ((*s)->stack[0] > (*s)->stack[1] && (*s)->stack[1] < (*s)->stack[2]
+		&& (*s)->stack[0] < (*s)->stack[2])
+		do_swap(s, 'a');
+	else if ((*s)->stack[0] > (*s)->stack[1] && (*s)->stack[1] > (*s)->stack[2]
+		&& (*s)->stack[0] > (*s)->stack[2])
 	{
-		swap(&s, 'a');
-		revrotate(&s, 'a');
+		do_swap(s, 'a');
+		do_revrot(s, 'a');
 	}
-	else if (s->stack[0] > s->stack[1] && s->stack[1] < s->stack[2]
-		&& s->stack[0] > s->stack[2])
-		rotate(&stack, 'a');
-	else if (s->stack[0] < s->stack[1] && s->stack[1] > s->stack[2]
-		&& s->stack[0] < s->stack[2])
+	else if ((*s)->stack[0] > (*s)->stack[1] && (*s)->stack[1] < (*s)->stack[2]
+		&& (*s)->stack[0] > (*s)->stack[2])
+		do_rot(s, 'a');
+	else if ((*s)->stack[0] < (*s)->stack[1] && (*s)->stack[1] > (*s)->stack[2]
+		&& (*s)->stack[0] < (*s)->stack[2])
 	{
-		swap(&s, 'a');
-		rotate(&s, 'a');
+		do_swap(s, 'a');
+		do_rot(s, 'a');
 	}
-	if (s->stack[0] < s->stack[1] && s->stack[1] > s->stack[2]
-		&& s->stack[0] > s->stack[2])
-		revrotate(&s, 'a');
+	if ((*s)->stack[0] < (*s)->stack[1] && (*s)->stack[1] > (*s)->stack[2]
+		&& (*s)->stack[0] > (*s)->stack[2])
+		do_revrot(s, 'a');
 }
 /*
 void	four_sort(t_stack *stack_a, t_stack *stack_b)

@@ -12,25 +12,25 @@
 
 #include "push_swap.h"
 
-void freeall(t_stack *stack_a, t_stack *stack_b)
+void freeall(t_stack **stack_a, t_stack **stack_b)
 {
-	free(stack_a->stack);
-	if (!stack_b->stack && !stack_b->finalpos && !stack_a->finalpos)
+	free((*stack_a)->stack);
+	if (!(*stack_b)->stack && !(*stack_b)->finalpos && !(*stack_a)->finalpos)
 	{
-		free(stack_b->stack);
-		free(stack_b->finalpos);
-		free(stack_a->finalpos);
+		free((*stack_b)->stack);
+		free((*stack_b)->finalpos);
+		free((*stack_a)->finalpos);
 	}
 }
 
 int	main(int argc, char **argv)
 {
-	t_stack	stack_a;
-	t_stack	stack_b;
+	t_stack	*stack_a;
+	t_stack	*stack_b;
 	int		count;
 
 	stack_a->stack = malloc((argc - 1) * sizeof(int));
-	if (checker(stack_a, argc - 1) != 1)
+	if (checker(&stack_a) != 1)
 	{
 		stack_a->finalpos = malloc((argc - 1) * sizeof(int));
 		stack_b->stack = malloc((argc - 1) * sizeof(int));
