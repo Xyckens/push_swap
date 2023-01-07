@@ -17,22 +17,14 @@ int	checker(t_stack *stack)
 	int	i;
 	int	j;
 	int	flag;
-	int count;
 
 	i = 0;
 	flag = 0;
-	count = 0;
-	while (count < 5)
-	{
-		ft_printf("[%d]\n", stack->stack[count]);
-		count++;
-	}
 	while (i < stack->len && flag == 0)
 	{
 		j = i + 1;
 		while (j < stack->len)
 		{
-			ft_printf("%d %d \n", stack->stack[i], stack->stack[j]);
 			if (stack->stack[i] == stack->stack[j]
 				|| stack->stack[j] > INT_MAX || stack->stack[j] < INT_MIN)
 			{
@@ -47,23 +39,24 @@ int	checker(t_stack *stack)
 	return (flag);
 }
 
-void finalpos(t_stack **stack)
+void finalpos(t_stack *stack)
 {
 	int	count1;
 	int	count2;
 	int lower;
 
 	count1 = 0;
-	while (count1++ <= (*stack)->len)
+	while (count1 < stack->len)
 	{
 		lower = 0;
 		count2 = 0;
-		while (count2 <= (*stack)->len)
+		while (count2 < stack->len)
 		{
-			if ((*stack)->stack[count2] < (*stack)->stack[count1])
+			if (stack->stack[count2] < stack->stack[count1])
 				lower++;
 			count2++;
 		}
-		(*stack)->finalpos[count1] = lower;
+		stack->finalpos[count1] = lower;
+		count1++;
 	}
 }
