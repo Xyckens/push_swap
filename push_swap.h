@@ -43,5 +43,6 @@ void	sort100less(t_stack *stack_a, t_stack *stack_b);
 void	sort500lessormore(t_stack *stack_a, t_stack *stack_b);
 void	two_sort(t_stack *stack);
 void	three_sort(t_stack *s);
+void	printstacks(t_stack *stack_a, t_stack *stack_b);
 
 #endif
