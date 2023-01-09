@@ -47,37 +47,42 @@ void	prepare_stack_b(t_stack *stack_b, int toarrive)
 }
 int	findsecondbiggest(t_stack *stack, int finalpos)
 {
-	int temp;
+	int templower;
+	int temphigher;
 	int	count;
 
 	count = 0;
-	temp = 0;
+	templower = 0;
+	temphigher = 0;
 	ft_printf("entrou");
 	while (count < stack->len)
 	{
 		count++;
-		if (stack->finalpos[count] > stack->finalpos[temp])
-			temp = count;
+		if (stack->finalpos[count] > finalpos)
+			if (stack->finalpos[temphigher] > stack->finalpos[count] || temphigher == 0)
+				temphigher = count;
+		ft_printf("\ntemphigher = %d\n", temphigher);
+		if (stack->finalpos[count] < finalpos)
+			if (stack->finalpos[templower] < stack->finalpos[count] || templower == 0)
+				templower = count;
+		ft_printf("\ntemplower = %d\n", templower);
 	}
-	if (temp * 2 >= stack->len)
-	{
-		temp--;
-	}
+	if ((finalpos - stack->finalpos[templower]) < (stack->finalpos[temphigher] - finalpos))
+		count = templower;
 	else
-	{
-		temp++;
-	}
-	return (temp);
+		count = temphigher;
+	/*if (count * 2 >= stack->len)
+		count--;
+	else
+		count++;*/
+	ft_printf("\n stack->finalpos = %d count = %d\n", stack->finalpos[count], count);
+	return (count);
 }
 void	put_right_place(t_stack *stack, int finalpos, char c)
 {
 	int	count;
 
-	count = 0;
-	while (stack->finalpos[count] < finalpos && count <= stack->len)
-		count++;
-	if (count == stack->len + 1)
-		count = findsecondbiggest(stack, finalpos);
+	count = findsecondbiggest(stack, finalpos);
 	ft_printf("count = %d, len = %d\n", count, stack->len);
 	if (count * 2 >= stack->len)
 	{
@@ -90,7 +95,6 @@ void	put_right_place(t_stack *stack, int finalpos, char c)
 	{
 		while (count-- > 0)
 		{
-
 			do_revrot(stack, c);
 		}
 	}

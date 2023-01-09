@@ -44,5 +44,6 @@ void	sort500lessormore(t_stack *stack_a, t_stack *stack_b);
 void	two_sort(t_stack *stack);
 void	three_sort(t_stack *s);
 void	printstacks(t_stack *stack_a, t_stack *stack_b);
+int		findsecondbiggest(t_stack *stack, int finalpos);
 
 #endif
