@@ -52,29 +52,38 @@ int	findsecondbiggest(t_stack *stack, int finalpos)
 	int	count;
 
 	count = 0;
-	templower = 0;
-	temphigher = 0;
-	ft_printf("entrou");
+	templower = -1;
+	temphigher = -1;
 	while (count < stack->len)
 	{
-		count++;
 		if (stack->finalpos[count] > finalpos)
-			if (stack->finalpos[temphigher] > stack->finalpos[count] || temphigher == 0)
+			if (temphigher == -1 ||stack->finalpos[temphigher] > stack->finalpos[count])
 				temphigher = count;
-		ft_printf("\ntemphigher = %d\n", temphigher);
 		if (stack->finalpos[count] < finalpos)
-			if (stack->finalpos[templower] < stack->finalpos[count] || templower == 0)
+			if (templower == -1 || stack->finalpos[templower] < stack->finalpos[count])
 				templower = count;
-		ft_printf("\ntemplower = %d\n", templower);
+		count++;
 	}
-	if ((finalpos - stack->finalpos[templower]) < (stack->finalpos[temphigher] - finalpos))
-		count = templower;
+		ft_printf("\ntemphigher = %d\n", temphigher);
+		ft_printf("templower = %d\n", templower);
+	if (temphigher == -1 || ((finalpos - stack->finalpos[templower]) < (stack->finalpos[temphigher] - finalpos)))
+	{
+		ft_printf("templower\n");
+		count = templower + 1;
+		if (count <= 2)
+			count++;
+	}
 	else
-		count = temphigher;
-	/*if (count * 2 >= stack->len)
+	{
+		ft_printf("temphigher\n");
+		count = temphigher + 1;
+		if (count >= stack->len - 2)
+			count--;
+	}
+	if (count * 2 >= stack->len)
+		count++;
+	else
 		count--;
-	else
-		count++;*/
 	ft_printf("\n stack->finalpos = %d count = %d\n", stack->finalpos[count], count);
 	return (count);
 }
@@ -83,19 +92,20 @@ void	put_right_place(t_stack *stack, int finalpos, char c)
 	int	count;
 
 	count = findsecondbiggest(stack, finalpos);
-	ft_printf("count = %d, len = %d\n", count, stack->len);
 	if (count * 2 >= stack->len)
 	{
-		while (count++ != stack->len + 1)
+		while (count != stack->len + 1)
 		{
 			do_rot(stack, c);
+			count++;
 		}
 	}
 	else
 	{
-		while (count-- > 0)
+		while (count > 0)
 		{
 			do_revrot(stack, c);
+			count--;
 		}
 	}
 }
@@ -106,12 +116,14 @@ void	putbackfromb(t_stack *stack_a, t_stack *stack_b, int limit)
 	count = 0;
 	while (count++ < limit)
 	{
-		if (stack_b->stack[0] > stack_a->stack[0])
-		{
-			printstacks(stack_a, stack_b);
-			put_right_place(stack_a, stack_b->finalpos[0], 'a');
-		}
+		//if (stack_b->stack[0] > stack_a->stack[0])
+		//{
+		//}
+		printstacks(stack_a, stack_b);
+		put_right_place(stack_a, stack_b->finalpos[0], 'a');
 		push(stack_b, stack_a, 'a');
+		if (stack_a->finalpos[0] == stack_a->finalpos[1] + 1)
+			do_swap(stack_a, 'a');
 	}
 }
 void	sort100less(t_stack *stack_a, t_stack *stack_b)
