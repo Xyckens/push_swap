@@ -15,27 +15,27 @@
 void	do_rot(t_stack *stack, char c)
 {
 	rotate(stack);
-	ft_printf("r%c\n", c);
+	ft_printf("rr%c\n", c);
 }
 
 void	do_bothrot(t_stack *stack_x, t_stack *stack_y)
 {
 	rotate(stack_x);
 	rotate(stack_y);
-	ft_printf("rr\n");
+	ft_printf("rrr\n");
 }
 
 void	do_revrot(t_stack *stack, char c)
 {
 	revrotate(stack);
-	ft_printf("rr%c\n", c);
+	ft_printf("r%c\n", c);
 }
 
 void	do_bothrevrot(t_stack *stack_x, t_stack *stack_y)
 {
 	revrotate(stack_x);
 	revrotate(stack_y);
-	ft_printf("rrr\n");
+	ft_printf("rr\n");
 }
 
 void rot_or_revrot(t_stack *stack, char *heavy, char c)

@@ -60,3 +60,29 @@ void finalpos(t_stack *stack)
 		count1++;
 	}
 }
+
+void	zerofirstplace(t_stack *stack)
+{
+	int	count;
+
+	count = 0;
+	while (stack->finalpos[count] != 0)
+		count++;
+	if (count * 2 >= stack->len)
+	{
+		count++;
+		while (count != stack->len + 1)
+		{
+			do_rot(stack, 'a');
+			count++;
+		}
+	}
+	else
+	{
+		while (count > 0)
+		{
+			do_revrot(stack, 'a');
+			count--;
+		}
+	}
+}

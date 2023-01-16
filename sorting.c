@@ -42,19 +42,3 @@ void	three_sort(t_stack *s)
 		&& s->stack[0] > s->stack[2])
 		do_rot(s, 'a');
 }
-/*
-void	four_sort(t_stack *stack_a, t_stack *stack_b)
-{
-	push(&stack_a, &stack_b, 'b');
-	three_sort(&stack_a);
-	push(&stack_b, &stack_a, 'a');
-	if (stack_a[i] > stack_a[i + 1] && i < 4)
-	{
-		
-	}
-}
-
-void	five_sort(int *stack_a, int *stack_b)
-{
-	
-}*/
