@@ -37,13 +37,18 @@ void	do_bothrevrot(t_stack *stack_x, t_stack *stack_y);
 void 	rot_or_revrot(t_stack *stack, char *heavy, char c);
 char	*bottom_top_heavy(t_stack *stack, int flag);
 void	prepare_stack_b(t_stack *stack_b, int toarrive);
-void	put_right_place(t_stack *stack, int finalpos, char c);
+void	put_right_place(t_stack *stack, int finalpos, char c, char *to_a_to_b);
 void	putbackfromb(t_stack *stack_a, t_stack *stack_b, int limit);
 void	sort100less(t_stack *stack_a, t_stack *stack_b);
-void	sort500lessormore(t_stack *stack_a, t_stack *stack_b);
 void	two_sort(t_stack *stack);
 void	three_sort(t_stack *s);
 void	printstacks(t_stack *stack_a, t_stack *stack_b);
 int		findsecondbiggest(t_stack *stack, int finalpos);
+void	zerofirstplace(t_stack *stack);
+void	sort10less(t_stack *stack_a, t_stack *stack_b);
+int		find_right_place1(t_stack *stack, int finalpos);
+int		find_right_place2(t_stack *stack, int finalpos);
+void	sort500less(t_stack *stack_a, t_stack *stack_b);
+void	biggestfirstplace(t_stack *stack);
 
 #endif

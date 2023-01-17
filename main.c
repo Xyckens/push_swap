@@ -29,12 +29,8 @@ void printstacks(t_stack *stack_a, t_stack *stack_b)
 	
 	count = 0;
 	ft_printf("\n stack_a\n");
-
 	while (count < stack_a->len)
 	{
-		/*if ((stack_a->finalpos[count] < stack_a->finalpos[count - 1]
-			|| stack_a->finalpos[count] > stack_a->finalpos[count + 1]) && count + 1 <stack_a->len)
-			ft_printf("\nmerda\n");*/
 		ft_printf("[%d]  [%d]\n", stack_a->stack[count], stack_a->finalpos[count]);
 		count++;
 	}
@@ -71,21 +67,15 @@ int	main(int argc, char **argv)
 		finalpos(&stack_a);
 	}
 	//test
-	count = 0;
-	while (count < stack_a.len)
-	{
-		ft_printf("[%d]  [%d]\n", stack_a.stack[count], stack_a.finalpos[count]);
-		count++;
-	}
-	count = 0;
+	//printstacks(&stack_a, &stack_b);
 	if (stack_a.len < 11)
 		sort10less(&stack_a, &stack_b);
-	else //if (stack_a.len < 101)
+	else if (stack_a.len < 101)
 		sort100less(&stack_a, &stack_b);
-	/*else
-		sort500less(&stack_a, &stack_b);*/
+	else
+		sort500less(&stack_a, &stack_b);
 	zerofirstplace(&stack_a);
-	printstacks(&stack_a, &stack_b);
+	//printstacks(&stack_a, &stack_b);
 	//end test
 	freeall(&stack_a, &stack_b);
 	return (0);

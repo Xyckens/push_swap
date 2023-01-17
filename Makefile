@@ -25,7 +25,8 @@ SRC = checker.c \
 	ops3.c \
 	put_right_place.c \
 	sorting.c \
-	sort_small.c
+	sort_small.c \
+	sort_big.c
 
 OBJ = $(SRC:.c=.o)
 
