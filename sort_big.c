@@ -88,47 +88,61 @@ void	sort500less(t_stack *stack_a, t_stack *stack_b)
 	int		count;
 	char	*heavy;
 	int		fixedlen;
+	int		fixedrest;
 
-	fixedlen = stack_a->len;
+	fixedlen = stack_a->len / 4;
+	fixedrest = stack_a->len % 4;
 	heavy = bottom_top_heavy(stack_a, 1);
-	count = fixedlen / 4;
-	while (count-- > 0)
+	count = fixedlen;
+	while (count-- > 0 - fixedrest)
 	{
-		while (stack_a->finalpos[0] <= fixedlen * 3 / 4)
+		while (stack_a->finalpos[0] < fixedlen * 3)
 			rot_or_revrot(stack_a, heavy, 'a');
-		printstacks(stack_a, stack_b);
+		put_right_place(stack_b, stack_a->finalpos[0], 'b', "to_b");
+		//ft_printf("\n final pos = %d %d\n",stack_a->finalpos[0], stack_a->stack[0]);
+		//ft_printf("\n count = %d\n",count);
+		push(stack_a, stack_b, 'b');
+	}
+	biggestfirstplace(stack_b);
+	putbackfromb(stack_a, stack_b, fixedlen + fixedrest);
+	heavy = bottom_top_heavy(stack_a, 1);
+	while (++count < fixedlen - fixedrest)
+	{
+		while (stack_a->finalpos[0] < fixedlen * 2 || stack_a->finalpos[0] >= fixedlen * 3)
+		{
+			//ft_printf("\n count = %d\n",count);
+
+			rot_or_revrot(stack_a, heavy, 'a');
+		}
+		put_right_place(stack_b, stack_a->finalpos[0], 'b', "to_b");
+		push(stack_a, stack_b, 'b');
+	}
+	//biggestfirstplace(stack_b);
+	putbackfromb(stack_a, stack_b, fixedlen);
+	printstacks(stack_a, stack_b);
+	exit(1);
+	heavy = bottom_top_heavy(stack_a, -1);
+	count = fixedlen;
+	while (count-- > 0 - fixedrest + 2)
+	{
+		while (stack_a->finalpos[0] < fixedlen || stack_a->finalpos[0] > fixedlen * 2)
+		{
+			//ft_printf("\n%d %d %d\n",count, fixedlen, fixedlen * 2 - fixedlen);
+			rot_or_revrot(stack_a, heavy, 'a');
+		}
 		put_right_place(stack_b, stack_a->finalpos[0], 'b', "to_b");
 		push(stack_a, stack_b, 'b');
 	}
 	biggestfirstplace(stack_b);
-	printstacks(stack_a, stack_b);
-	exit(1);
-	putbackfromb(stack_a, stack_b, fixedlen / 4);
-	heavy = bottom_top_heavy(stack_a, 1);
-	while (count++ < fixedlen / 4)
+	putbackfromb(stack_a, stack_b, fixedlen + 1);
+	heavy = bottom_top_heavy(stack_a, -1);
+	while (++count < fixedlen)
 	{
-		while (stack_a->finalpos[0] >= fixedlen / 2 && stack_a->finalpos[0] < fixedlen * 3 / 4)
+		while (stack_a->finalpos[0] > fixedlen)
 			rot_or_revrot(stack_a, heavy, 'a');
 		put_right_place(stack_b, stack_a->finalpos[0], 'b', "to_b");
 		push(stack_a, stack_b, 'b');
 	}
-	putbackfromb(stack_a, stack_b, fixedlen / 4);
-	heavy = bottom_top_heavy(stack_a, -1);
-	count = fixedlen / 4;
-	while (count-- > 0)
-	{
-		while (stack_a->finalpos[0] <= fixedlen / 4 && stack_a->finalpos[0] < fixedlen / 2)
-			rot_or_revrot(stack_a, heavy, 'a');
-		put_right_place(stack_b, stack_a->finalpos[0], 'b', "to_b");
-		push(stack_a, stack_b, 'b');
-	}
-	putbackfromb(stack_a, stack_b, fixedlen / 4 + fixedlen % 4);
-	heavy = bottom_top_heavy(stack_a, -1);
-	while (count++ < fixedlen / 4 + fixedlen % 4)
-	{
-		while (stack_a->finalpos[0] > fixedlen / 4  + fixedlen % 4)
-			rot_or_revrot(stack_a, heavy, 'a');
-		push(stack_a, stack_b, 'b');
-	}
-	putbackfromb(stack_a, stack_b, fixedlen / 4);
+	biggestfirstplace(stack_b);
+	putbackfromb(stack_a, stack_b, fixedlen + 1);
 }

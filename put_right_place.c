@@ -133,7 +133,7 @@ void	sort100less(t_stack *stack_a, t_stack *stack_b)
 		put_right_place(stack_b, stack_a->finalpos[0], 'b', "to_b");
 		push(stack_a, stack_b, 'b');
 	}
-	biggestfirstplace(stack_b);
+	//biggestfirstplace(stack_b);
 	//printstacks(stack_a, stack_b);
 	putbackfromb(stack_a, stack_b, fixed_half_len);
 	heavy = bottom_top_heavy(stack_a, -1);
@@ -145,7 +145,7 @@ void	sort100less(t_stack *stack_a, t_stack *stack_b)
 		put_right_place(stack_b, stack_a->finalpos[0], 'b', "to_b");
 		push(stack_a, stack_b, 'b');
 	}
-	biggestfirstplace(stack_b);
+	//biggestfirstplace(stack_b);
 	//printstacks(stack_a, stack_b);
 	putbackfromb(stack_a, stack_b, fixed_half_len);
 }

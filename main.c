@@ -75,7 +75,7 @@ int	main(int argc, char **argv)
 	else
 		sort500less(&stack_a, &stack_b);
 	zerofirstplace(&stack_a);
-	//printstacks(&stack_a, &stack_b);
+	printstacks(&stack_a, &stack_b);
 	//end test
 	freeall(&stack_a, &stack_b);
 	return (0);
