@@ -36,8 +36,8 @@ char	*bottom_top_heavy(t_stack *stack, int flag)
 
 int	find_right_place1(t_stack *stack, int finalpos)
 {
-	int low;
-	int high;
+	int	low;
+	int	high;
 	int	count;
 
 	count = 0;
@@ -53,21 +53,11 @@ int	find_right_place1(t_stack *stack, int finalpos)
 				low = count;
 		count++;
 	}
-	//ft_printf("\ntcount = %d stacklen = %d\n", count, stack->len);
-	//ft_printf("\ntemphigher = %d\n", high);
-	//ft_printf("templower = %d\n", low);
-	if ((low == -1
-		|| (stack->finalpos[high] - finalpos < finalpos - stack->finalpos[low])) && high != -1)
-	{
-		//ft_printf("high\n");
+	if (((stack->finalpos[high] - finalpos <= finalpos - stack->finalpos[low])
+			|| low == -1) && high != -1)
 		count = high;
-	}
 	else
-	{
-		//ft_printf("low\n");
 		count = low + 1;
-	}
-	//ft_printf("\n stack->finalpos = %d count = %d\n", stack->finalpos[count], count);
 	return (count);
 }
 
@@ -107,16 +97,13 @@ void	putbackfromb(t_stack *stack_a, t_stack *stack_b, int limit)
 	count = 0;
 	while (count++ < limit)
 	{
-		//if (stack_b->stack[0] > stack_a->stack[0])
-		//{
-		//}
-		//printstacks(stack_a, stack_b);
 		put_right_place(stack_a, stack_b->finalpos[0], 'a', "to_a");
 		push(stack_b, stack_a, 'a');
 		if (stack_a->finalpos[0] == stack_a->finalpos[1] + 1)
 			do_swap(stack_a, 'a');
 	}
 }
+
 void	sort100less(t_stack *stack_a, t_stack *stack_b)
 {
 	int		count;
@@ -133,8 +120,7 @@ void	sort100less(t_stack *stack_a, t_stack *stack_b)
 		put_right_place(stack_b, stack_a->finalpos[0], 'b', "to_b");
 		push(stack_a, stack_b, 'b');
 	}
-	//biggestfirstplace(stack_b);
-	//printstacks(stack_a, stack_b);
+	biggestfirstplace(stack_b);
 	putbackfromb(stack_a, stack_b, fixed_half_len);
 	heavy = bottom_top_heavy(stack_a, -1);
 	count = stack_a->len / 2;
@@ -145,7 +131,6 @@ void	sort100less(t_stack *stack_a, t_stack *stack_b)
 		put_right_place(stack_b, stack_a->finalpos[0], 'b', "to_b");
 		push(stack_a, stack_b, 'b');
 	}
-	//biggestfirstplace(stack_b);
-	//printstacks(stack_a, stack_b);
+	biggestfirstplace(stack_b);
 	putbackfromb(stack_a, stack_b, fixed_half_len);
 }

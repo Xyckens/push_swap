@@ -12,33 +12,51 @@
 
 #include "push_swap.h"
 
-void freeall(t_stack *stack_a, t_stack *stack_b)
+int	all_digits(int ac, char **av)
 {
-	free(stack_a->stack);
-	if (!stack_b->stack && !stack_b->finalpos && !stack_a->finalpos)
+	int	i;
+	int j;
+
+	i = 0;
+	while (++i < ac)
 	{
-		free(stack_b->stack);
-		free(stack_b->finalpos);
-		free(stack_a->finalpos);
+		j = 0;
+		while (av[i][j])
+		{
+			if (is_digit_or_signal(av[i][j]) == 0)
+				return (0);
+			j++;
+		}
 	}
+	return (1);
 }
 
-void printstacks(t_stack *stack_a, t_stack *stack_b)
+void	freeall(t_stack *stack_a, t_stack *stack_b)
+{
+	free(stack_a->stack);
+	free(stack_b->stack);
+	free(stack_a->finalpos);
+	free(stack_b->finalpos);
+}
+
+void	printstacks(t_stack *a, t_stack *b)
 {
 	int	count;
-	
+
 	count = 0;
 	ft_printf("\n stack_a\n");
-	while (count < stack_a->len)
+	while (count < a->len)
 	{
-		ft_printf("[%d]  [%d]\n", stack_a->stack[count], stack_a->finalpos[count]);
+		ft_printf("[%d]  [%d]\n", a->stack[count], a->finalpos[count]);
 		count++;
 	}
+	if (b == NULL)
+		return ;
 	count = 0;
 	ft_printf("\n stack_b\n");
-	while (count < stack_b->len)
+	while (count < b->len)
 	{
-		ft_printf("[%d]  [%d]\n", stack_b->stack[count], stack_b->finalpos[count]);
+		ft_printf("[%d]  [%d]\n", b->stack[count], b->finalpos[count]);
 		count++;
 	}
 }
@@ -49,25 +67,23 @@ int	main(int argc, char **argv)
 	t_stack	stack_b;
 	int		count;
 
+	if (all_digits(argc, argv) == 0)
+	{
+		ft_putstr_fd("All arguments must be digits\n", STDERR_FILENO);
+		exit(EXIT_FAILURE);
+	}
 	stack_a.stack = malloc((argc - 1) * sizeof(int));
 	stack_a.len = argc - 1;
 	stack_b.len = 0;
-	count = 0;
-	while (count < stack_a.len)
-	{
+	count = -1;
+	while (++count < stack_a.len)	
 		stack_a.stack[count] = ft_atoi(argv[count + 1]);
-		count++;
-	}
-	if (checker(&stack_a) != 1)
-	{
-		stack_a.finalpos = malloc((stack_a.len) * sizeof(int));
-		stack_b.stack = malloc((stack_a.len) * sizeof(int));
-		stack_b.finalpos = malloc((stack_a.len) * sizeof(int));
-		
-		finalpos(&stack_a);
-	}
-	//test
-	//printstacks(&stack_a, &stack_b);
+	checker(&stack_a);
+	stack_a.finalpos = malloc((stack_a.len) * sizeof(int));
+	stack_b.stack = malloc((stack_a.len) * sizeof(int));
+	stack_b.finalpos = malloc((stack_a.len) * sizeof(int));
+	finalpos(&stack_a);
+
 	if (stack_a.len < 11)
 		sort10less(&stack_a, &stack_b);
 	else if (stack_a.len < 101)
@@ -76,7 +92,6 @@ int	main(int argc, char **argv)
 		sort500less(&stack_a, &stack_b);
 	zerofirstplace(&stack_a);
 	printstacks(&stack_a, &stack_b);
-	//end test
 	freeall(&stack_a, &stack_b);
 	return (0);
 }

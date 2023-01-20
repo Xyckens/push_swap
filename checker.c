@@ -12,15 +12,13 @@
 
 #include "push_swap.h"
 
-int	checker(t_stack *stack)
+void	checker(t_stack *stack)
 {
 	int	i;
 	int	j;
-	int	flag;
 
 	i = 0;
-	flag = 0;
-	while (i < stack->len && flag == 0)
+	while (i < stack->len)
 	{
 		j = i + 1;
 		while (j < stack->len)
@@ -28,22 +26,21 @@ int	checker(t_stack *stack)
 			if (stack->stack[i] == stack->stack[j]
 				|| stack->stack[j] > INT_MAX || stack->stack[j] < INT_MIN)
 			{
-				flag = 1;
 				ft_printf("Error\n");
-				break ;
+				free(stack->stack);
+				exit(1);
 			}
 			j++;
 		}
 		i++;
 	}
-	return (flag);
 }
 
-void finalpos(t_stack *stack)
+void	finalpos(t_stack *stack)
 {
 	int	count1;
 	int	count2;
-	int lower;
+	int	lower;
 
 	count1 = 0;
 	while (count1 < stack->len)
@@ -85,4 +82,18 @@ void	zerofirstplace(t_stack *stack)
 			count--;
 		}
 	}
+}
+
+int	isordered(t_stack *stack)
+{
+	int	count;
+
+	count = 0;
+	while (count < stack->len - 1)
+	{
+		if (stack->stack[count] > stack->stack[count + 1])
+			return (1);
+		count++;
+	}
+	return (0);
 }

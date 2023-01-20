@@ -48,5 +48,7 @@ void	push(t_stack *stack_x, t_stack *stack_y, char c)
 	push_x_to_y(stack_x, stack_y);
 	stack_x->len--;
 	stack_y->len++;
+	if (stack_x->len < 0)
+		ft_printf("parouuuuu\n");
 	ft_printf("p%c\n", c);
 }

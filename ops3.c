@@ -38,7 +38,7 @@ void	do_bothrevrot(t_stack *stack_x, t_stack *stack_y)
 	ft_printf("rr\n");
 }
 
-void rot_or_revrot(t_stack *stack, char *heavy, char c)
+void	rot_or_revrot(t_stack *stack, char *heavy, char c)
 {
 	if (!ft_strncmp(heavy, "rot", 3))
 		do_rot(stack, c);
