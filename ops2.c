@@ -55,7 +55,7 @@ void	revrotate(t_stack *stack)
 	count = 0;
 	temp = stack->stack[0];
 	temp2 = stack->finalpos[0];
-	while (count <= stack->len)
+	while (count < stack->len - 1)
 	{
 		stack->stack[count] = stack->stack[count + 1];
 		stack->finalpos[count] = stack->finalpos[count + 1];

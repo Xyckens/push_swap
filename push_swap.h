@@ -48,7 +48,7 @@ void	zerofirstplace(t_stack *stack);
 void	sort10less(t_stack *stack_a, t_stack *stack_b);
 int		find_right_place1(t_stack *stack, int finalpos);
 int		find_right_place2(t_stack *stack, int finalpos);
-void	sort500less(t_stack *stack_a, t_stack *stack_b);
+void	sort500less(t_stack *stack_a, t_stack *stack_b, int fixed);
 void	biggestfirstplace(t_stack *stack);
 int		isordered(t_stack *stack);
 

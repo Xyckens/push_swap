@@ -34,6 +34,11 @@ void	checker(t_stack *stack)
 		}
 		i++;
 	}
+	if (isordered(stack) == 0)
+	{
+		free(stack->stack);
+		exit(1);
+	}
 }
 
 void	finalpos(t_stack *stack)

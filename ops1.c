@@ -31,7 +31,7 @@ void	push_x_to_y(t_stack *stack_x, t_stack *stack_y)
 {
 	int	count;
 
-	count = stack_y->len;
+	count = stack_y->len - 1;
 	while (count >= 0)
 	{
 		stack_y->stack[count + 1] = stack_y->stack[count];

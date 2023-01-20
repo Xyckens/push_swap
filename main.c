@@ -15,7 +15,7 @@
 int	all_digits(int ac, char **av)
 {
 	int	i;
-	int j;
+	int	j;
 
 	i = 0;
 	while (++i < ac)
@@ -45,10 +45,13 @@ void	printstacks(t_stack *a, t_stack *b)
 
 	count = 0;
 	ft_printf("\n stack_a\n");
-	while (count < a->len)
+	if (a != NULL)
 	{
-		ft_printf("[%d]  [%d]\n", a->stack[count], a->finalpos[count]);
-		count++;
+		while (count < a->len)
+		{
+			ft_printf("[%d]  [%d]\n", a->stack[count], a->finalpos[count]);
+			count++;
+		}
 	}
 	if (b == NULL)
 		return ;
@@ -61,6 +64,17 @@ void	printstacks(t_stack *a, t_stack *b)
 	}
 }
 
+int	valid(ssize_t nb, t_stack *stack)
+{
+	if (nb > 2147483647)
+	{
+		ft_printf("Error\n");
+		free(stack->stack);
+		exit(1);
+	}
+	return ((int) nb);
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack	stack_a;
@@ -69,29 +83,27 @@ int	main(int argc, char **argv)
 
 	if (all_digits(argc, argv) == 0)
 	{
-		ft_putstr_fd("All arguments must be digits\n", STDERR_FILENO);
+		ft_putstr_fd("Error\n", STDERR_FILENO);
 		exit(EXIT_FAILURE);
 	}
 	stack_a.stack = malloc((argc - 1) * sizeof(int));
 	stack_a.len = argc - 1;
 	stack_b.len = 0;
 	count = -1;
-	while (++count < stack_a.len)	
-		stack_a.stack[count] = ft_atoi(argv[count + 1]);
+	while (++count < stack_a.len)
+		stack_a.stack[count] = valid(ft_atoi(argv[count + 1]), &stack_a);
 	checker(&stack_a);
-	stack_a.finalpos = malloc((stack_a.len) * sizeof(int));
-	stack_b.stack = malloc((stack_a.len) * sizeof(int));
-	stack_b.finalpos = malloc((stack_a.len) * sizeof(int));
+	stack_a.finalpos = ft_calloc((stack_a.len), sizeof(int));
+	stack_b.stack = ft_calloc((stack_a.len), sizeof(int));
+	stack_b.finalpos = ft_calloc((stack_a.len), sizeof(int));
 	finalpos(&stack_a);
-
 	if (stack_a.len < 11)
 		sort10less(&stack_a, &stack_b);
 	else if (stack_a.len < 101)
 		sort100less(&stack_a, &stack_b);
 	else
-		sort500less(&stack_a, &stack_b);
+		sort500less(&stack_a, &stack_b, stack_a.len);
 	zerofirstplace(&stack_a);
-	printstacks(&stack_a, &stack_b);
 	freeall(&stack_a, &stack_b);
 	return (0);
 }

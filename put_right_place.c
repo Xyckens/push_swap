@@ -34,27 +34,29 @@ char	*bottom_top_heavy(t_stack *stack, int flag)
 		return ("revrot");
 }
 
-int	find_right_place1(t_stack *stack, int finalpos)
+int	find_right_place1(t_stack *stack, int fin)
 {
 	int	low;
 	int	high;
 	int	count;
 
-	count = 0;
+	count = -1;
 	low = -1;
 	high = -1;
-	while (count < stack->len)
+	while (++count < stack->len)
 	{
-		if (stack->finalpos[count] > finalpos)
+		if (stack->finalpos[count] > fin)
 			if (high == -1 || stack->finalpos[count] < stack->finalpos[high])
 				high = count;
-		if (stack->finalpos[count] < finalpos)
+		if (stack->finalpos[count] < fin)
 			if (low == -1 || stack->finalpos[count] > stack->finalpos[low])
 				low = count;
-		count++;
 	}
-	if (((stack->finalpos[high] - finalpos <= finalpos - stack->finalpos[low])
-			|| low == -1) && high != -1)
+	if (high == -1)
+		high++;
+	if ((low == -1
+			|| (stack->finalpos[high] - fin <= fin - stack->finalpos[low]))
+		&& high != -1)
 		count = high;
 	else
 		count = low + 1;
