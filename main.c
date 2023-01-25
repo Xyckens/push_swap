@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-int	all_digits(int ac, char **av)
+void	isall_digits(int ac, char **av)
 {
 	int	i;
 	int	j;
@@ -24,11 +24,13 @@ int	all_digits(int ac, char **av)
 		while (av[i][j])
 		{
 			if (is_digit_or_signal(av[i][j]) == 0)
-				return (0);
+			{
+				ft_putstr_fd("Error\n", STDERR_FILENO);
+				exit(EXIT_FAILURE);
+			}
 			j++;
 		}
 	}
-	return (1);
 }
 
 void	freeall(t_stack *stack_a, t_stack *stack_b)
@@ -81,11 +83,7 @@ int	main(int argc, char **argv)
 	t_stack	stack_b;
 	int		count;
 
-	if (all_digits(argc, argv) == 0)
-	{
-		ft_putstr_fd("Error\n", STDERR_FILENO);
-		exit(EXIT_FAILURE);
-	}
+	isall_digits(argc, argv);
 	stack_a.stack = malloc((argc - 1) * sizeof(int));
 	stack_a.len = argc - 1;
 	stack_b.len = 0;

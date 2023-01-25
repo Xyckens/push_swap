@@ -12,33 +12,74 @@
 
 #include "push_swap.h"
 
-void	two_sort(t_stack *stack)
+int	find_right_place1(t_stack *stack, int fin)
 {
-	if (stack->stack[0] < stack->stack[1])
-		do_swap(stack, 'a');
+	int	low;
+	int	high;
+	int	count;
+
+	count = -1;
+	low = -1;
+	high = -1;
+	while (++count < stack->len)
+	{
+		if (stack->finalpos[count] > fin)
+			if (high == -1 || stack->finalpos[count] < stack->finalpos[high])
+				high = count;
+		if (stack->finalpos[count] < fin)
+			if (low == -1 || stack->finalpos[count] > stack->finalpos[low])
+				low = count;
+	}
+	if (high == -1)
+		high++;
+	if ((low == -1
+			|| (stack->finalpos[high] - fin <= fin - stack->finalpos[low]))
+		&& high != -1)
+		count = high;
+	else
+		count = low + 1;
+	return (count);
 }
 
-void	three_sort(t_stack *s)
+void	put_right_place(t_stack *stack, int finalpos, char c, char *to_a_to_b)
 {
-	if (s->stack[0] > s->stack[1] && s->stack[1] < s->stack[2]
-		&& s->stack[0] < s->stack[2])
-		do_swap(s, 'a');
-	else if (s->stack[0] > s->stack[1] && s->stack[1] > s->stack[2]
-		&& s->stack[0] > s->stack[2])
+	int	count;
+
+	if (ft_strncmp(to_a_to_b, "to_a", 4) == 0)
+		count = find_right_place1(stack, finalpos);
+	else
+		count = find_right_place2(stack, finalpos);
+	if (count > stack->len)
+		count = 0;
+	if (count * 2 >= stack->len)
 	{
-		do_swap(s, 'a');
-		do_rot(s, 'a');
+		count++;
+		while (count != stack->len + 1)
+		{
+			do_rot(stack, c);
+			count++;
+		}
 	}
-	else if (s->stack[0] > s->stack[1] && s->stack[1] < s->stack[2]
-		&& s->stack[0] > s->stack[2])
-		do_revrot(s, 'a');
-	else if (s->stack[0] < s->stack[1] && s->stack[1] > s->stack[2]
-		&& s->stack[0] < s->stack[2])
+	else
 	{
-		do_swap(s, 'a');
-		do_revrot(s, 'a');
+		while (count > 0)
+		{
+			do_revrot(stack, c);
+			count--;
+		}
 	}
-	else if (s->stack[0] < s->stack[1] && s->stack[1] > s->stack[2]
-		&& s->stack[0] > s->stack[2])
-		do_rot(s, 'a');
+}
+
+void	putbackfromb(t_stack *stack_a, t_stack *stack_b, int limit)
+{
+	int	count;
+
+	count = 0;
+	while (count++ < limit)
+	{
+		put_right_place(stack_a, stack_b->finalpos[0], 'a', "to_a");
+		push(stack_b, stack_a, 'a');
+		if (stack_a->finalpos[0] == stack_a->finalpos[1] + 1)
+			do_swap(stack_a, 'a');
+	}
 }

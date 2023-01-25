@@ -52,9 +52,9 @@ void	sort500less(t_stack *stack_a, t_stack *stack_b, int fixed);
 void	biggestfirstplace(t_stack *stack);
 int		isordered(t_stack *stack);
 
-static inline int is_digit_or_signal(char c)
+static inline int	is_digit_or_signal(char c)
 {
-	if ((c >= '0' && c <= '9') || (c == '-' || c == '+')  || c == ' ')
+	if ((c >= '0' && c <= '9') || (c == '-' || c == '+') || c == ' ')
 		return (1);
 	return (0);
 }

@@ -12,6 +12,37 @@
 
 #include "push_swap.h"
 
+void	two_sort(t_stack *stack)
+{
+	if (stack->stack[0] < stack->stack[1])
+		do_swap(stack, 'a');
+}
+
+void	three_sort(t_stack *s)
+{
+	if (s->stack[0] > s->stack[1] && s->stack[1] < s->stack[2]
+		&& s->stack[0] < s->stack[2])
+		do_swap(s, 'a');
+	else if (s->stack[0] > s->stack[1] && s->stack[1] > s->stack[2]
+		&& s->stack[0] > s->stack[2])
+	{
+		do_swap(s, 'a');
+		do_rot(s, 'a');
+	}
+	else if (s->stack[0] > s->stack[1] && s->stack[1] < s->stack[2]
+		&& s->stack[0] > s->stack[2])
+		do_revrot(s, 'a');
+	else if (s->stack[0] < s->stack[1] && s->stack[1] > s->stack[2]
+		&& s->stack[0] < s->stack[2])
+	{
+		do_swap(s, 'a');
+		do_revrot(s, 'a');
+	}
+	else if (s->stack[0] < s->stack[1] && s->stack[1] > s->stack[2]
+		&& s->stack[0] > s->stack[2])
+		do_rot(s, 'a');
+}
+
 void	sort10less(t_stack *stack_a, t_stack *stack_b)
 {
 	int		count;
